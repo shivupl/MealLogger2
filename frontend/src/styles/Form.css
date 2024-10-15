@@ -34,3 +34,18 @@
   .form-button:hover {
     background-color: #0056b3;
   }
+
+
+  .form-reg {
+    color:#007bff;
+    padding-left: 4px;
+    text-align: center;
+  }
+
+
+
+  .form-reg:hover {
+    color: #0056b3;
+    background-color: transparent;
+  }
+

@@ -55,7 +55,14 @@ function Form({route, method}){
             placeholder="Passowrd"
         
         />
+
         <button className="form-button" type = "submit "> { val } </button>
+        {val == "Login" && 
+        <p>
+            Dont Have An Account? Reigster<a className = "form-reg" href="/register">Here</a>
+        </p>
+
+        }
 
     </form>);
 }

@@ -1,4 +1,5 @@
 import React from "react";
+import "../styles/Meal.css"
 
 function Meal({meal, onDelete}) {
 
