@@ -61,8 +61,14 @@ function Form({route, method}){
         <p>
             Dont Have An Account? Reigster<a className = "form-reg" href="/register">Here</a>
         </p>
-
         }
+        {val == "Register" && 
+        <p>
+            Already Have An Account? Login<a className = "form-reg" href="/login">Here</a>
+        </p>
+        }
+
+        
 
     </form>);
 }

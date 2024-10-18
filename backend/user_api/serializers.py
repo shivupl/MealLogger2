@@ -16,5 +16,6 @@ class UserSerializer(serializers.ModelSerializer):
 class MealSerializer(serializers.ModelSerializer):
     class Meta:
         model = Meal
-        fields = ["id", "title", "description", "created_at", "author"]
+        fields = ["id", "title", "description", "created_at", "author", "which"]
+        #fields = ["id", "title", "description", "created_at", "author"]
         extra_kwargs = {"author": {"read_only": True}}

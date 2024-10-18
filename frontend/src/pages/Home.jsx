@@ -5,7 +5,7 @@ import "../styles/Home.css"
 
 function Home() {
     const [meals, setMeals] = useState([])
-    const [description, setDesc] = useState("")
+    //const [description, setDesc] = useState("")
 
 
     const getMeals = () => {
