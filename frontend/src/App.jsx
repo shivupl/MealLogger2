@@ -7,6 +7,7 @@ import NotFound from "./pages/NotFound"
 import ProtectedRoute from "./components/ProtectedRoute"
 import Navbar from "./components/Navbar"
 import AddMeal from './pages/AddMeal'
+import MealDetail from "./pages/MealDetail"
 
 
 function Logout(){
@@ -39,8 +40,15 @@ function App() {
               <AddMeal/>
             </ProtectedRoute>
             }
-          />
+            />
 
+          <Route path = "/meal/:id/view" element = {
+            <ProtectedRoute>
+              <Navbar/>
+              <MealDetail/>
+            </ProtectedRoute>
+            }
+          />
 
 
 

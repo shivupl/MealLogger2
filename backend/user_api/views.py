@@ -36,4 +36,11 @@ class MealDelete(generics.DestroyAPIView):
         user = self.request.user
         return Meal.objects.filter(author=user)
     
-    
+class MealDetailView(generics.RetrieveAPIView):
+    #queryset = Meal.objects.all()
+    serializer_class = MealSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        user = self.request.user
+        return Meal.objects.filter(author=user)

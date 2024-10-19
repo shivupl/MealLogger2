@@ -25,8 +25,10 @@ function Home() {
             getMeals();
 
         }).catch((err) => alert(err))
-        
     };
+    
+
+
 
 
     return <div>
