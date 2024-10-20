@@ -1,0 +1,33 @@
+nav {
+    background-color: #333;
+    padding: 1rem;
+  }
+  
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  li {
+    display: inline;
+  }
+  
+  a {
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+  }
+  
+  a:hover {
+    background-color: #555;
+  }
+
+.logout-button{
+    color: red;
+  }
+
+  
+  
