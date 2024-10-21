@@ -59,6 +59,15 @@ class MealUpdateView(generics.UpdateAPIView):
     def get_queryset(self):
         user = self.request.user
         return Meal.objects.filter(author=user)
+    
+    def perform_update(self, serializer):
+        if serializer.is_valid():
+            serializer.save()
+        else:
+            print(serializer.errors)
+            
+        return super().perform_update(serializer)
+
 
 
 # Item views 

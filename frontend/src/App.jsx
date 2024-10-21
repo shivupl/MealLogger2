@@ -8,6 +8,7 @@ import ProtectedRoute from "./components/ProtectedRoute"
 import Navbar from "./components/Navbar"
 import AddMeal from './pages/AddMeal'
 import MealDetail from "./pages/MealDetail"
+import EditMeal from './pages/EditMeal'
 
 
 function Logout(){
@@ -46,6 +47,14 @@ function App() {
             <ProtectedRoute>
               <Navbar/>
               <MealDetail/>
+            </ProtectedRoute>
+            }
+          />
+
+          <Route path = "/meal/:id/edit" element = {
+            <ProtectedRoute>
+              <Navbar/>
+              <EditMeal/>
             </ProtectedRoute>
             }
           />

@@ -5,6 +5,7 @@ import api from "../api"
 import "../styles/AddMeal.css"
 
 function AddMeal() {
+
 const [description, setDesc] = useState("")
 const [title, setTitle] = useState("")
 const [which, setWhich] = useState("")
@@ -28,18 +29,13 @@ const createMeal = (e) => {
 }
 
 
-// const createItem = (e) => {
-//     e.preventDefault()
-//     api.post("api/meals/")
-// }
-
 
 return <div>
     <h2 className="page-title">Log A Meal</h2>
+
     <form onSubmit={createMeal}>
         <label htmlFor="title">Title:</label>
         <br />
-
 
         <input 
             type="text" 
@@ -48,9 +44,9 @@ return <div>
             required onChange={(e) => setTitle(e.target.value)}
             value = {title} 
         />
+
+
         <label htmlFor="description">Description:</label>
-
-
         <br />
 
         <textarea 

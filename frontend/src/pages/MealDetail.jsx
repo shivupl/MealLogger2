@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import api from "../api"
 
 
@@ -8,7 +8,8 @@ function MealDetail(){
     const { id } = useParams();
 
     const [meal, setMeal] = useState(null);
-    
+    const nav = useNavigate();
+
     const getMeal = () => {
         api.get(`api/meal/${id}/view`)
         .then((res) => {
@@ -21,6 +22,12 @@ function MealDetail(){
     }, [id]);
 
 
+    const editMeal = () => {
+        
+        nav(`/meal/${id}/edit`)
+
+    }
+
     return (
         <div>
             <h2>Meal Details</h2>
@@ -29,6 +36,10 @@ function MealDetail(){
             <p><strong>Description:</strong> {meal?.description}</p>
             <p><strong>Created At:</strong> {new Date(meal?.created_at).toLocaleString()}</p>
             <p><strong>Which:</strong> {meal?.which}</p>
+            <br />
+            <button className="edit-button" onClick={editMeal}>
+                Edit Meal
+            </button>
         </div>
     );
 }
