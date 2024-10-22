@@ -21,7 +21,7 @@ class Meal(models.Model):
 class Item(models.Model):
     name = models.CharField(max_length=25)
     calories = models.FloatField()
-    quantitiy = models.FloatField()
+    quantity = models.FloatField()
 
     meal = models.ForeignKey(Meal, on_delete=models.CASCADE, related_name="items")
 

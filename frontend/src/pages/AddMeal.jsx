@@ -11,14 +11,25 @@ const [title, setTitle] = useState("")
 const [which, setWhich] = useState("")
 
 
+const [itemName, setItemName] = useState("");
+const [itemCal, setItemCal] = useState(0);
+const [itemQuantity, setItemQuantity] = useState(0);
+
+const [items, setItems] = useState([]);
+
+
 const nav = useNavigate();
 
 const createMeal = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     api.post("api/meals/", {description, title, which}).then((res) => {
         if (res.status === 201){
+            const mID = res.data.id;
             alert("Meal Added");
-            nav("/")
+            items.forEach((item) => {
+                createItem(mID, item);
+            });
+            nav("/");
         }
         else{
             alert("unable to add meal")
@@ -26,6 +37,28 @@ const createMeal = (e) => {
             print("Response data:", res.data);
         }
     }).catch((err) => alert(err))
+}
+
+
+const addItem = (e) => {
+    e.preventDefault();
+    const temp = {
+        name: itemName,
+        calories: itemCal,
+        quantity: itemQuantity,
+    };
+    setItems([...items, temp]);
+    setItemName("");
+    setItemCal(0);
+    setItemQuantity(0);
+}
+
+const createItem = (mealId, item) => {
+    api.post(`api/meal/${mealId}/items`, {name: item.name, calories: item.calories, quantity: item.quantity}).then((res) => {
+        if(res.status != 201) {
+            alert("could not add item");
+        }
+    }).catch((err) => alert(err));
 }
 
 
@@ -67,6 +100,45 @@ return <div>
             <option value="Dinner">Dinner</option>
             <option value="Snack">Snack</option>
         </select>
+        <br />
+
+
+        <h3>Add Items</h3>
+
+        <label htmlFor="itemName">Item Name:</label>
+        <br />
+        <input
+            type="text"
+            id="itemName"
+            name="itemName"
+            required
+            onChange={(e) => setItemName(e.target.value)}
+            value={itemName}
+        />
+        <label htmlFor="itemCal">Calories:</label>
+        <br />
+        <input
+            type="number"
+            id="itemCal"
+            name="itemCal"
+            required
+            onChange={(e) => setItemCal(e.target.value)}
+            value={itemCal}
+        />
+        <label htmlFor="itemQuantity">Quantity:</label>
+        <br />
+        <input
+            type="number"
+            id="itemQuantity"
+            name="itemQuantity"
+            required
+            onChange={(e) => setItemQuantity(e.target.value)}
+            value={itemQuantity}
+        />
+        <br />
+        <button onClick={addItem}>Add Item</button>
+
+
         <br />
 
         <input type="submit" value="Submit"></input>
