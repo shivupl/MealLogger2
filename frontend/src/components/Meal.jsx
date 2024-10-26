@@ -21,7 +21,6 @@ function Meal({meal, onDelete}) {
         <p className="meal-which">{meal.which}</p>
         <p className="meal-date">{fDate}</p>
 
-
         <button className="view-button" onClick={viewMeal}>
             View Meal
         </button>

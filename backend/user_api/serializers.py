@@ -19,7 +19,7 @@ class UserSerializer(serializers.ModelSerializer):
 class ItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = Item
-        fields = ["name", "calories", "quantity"]
+        fields = ["id", "name", "calories", "quantity"]
 
 
 class MealSerializer(serializers.ModelSerializer):

@@ -42,7 +42,6 @@ class MealDelete(generics.DestroyAPIView):
         return Meal.objects.filter(author=user)
     
 class MealDetailView(generics.RetrieveAPIView):
-    #queryset = Meal.objects.all()
     serializer_class = MealSerializer
     permission_classes = [IsAuthenticated]
 
@@ -89,4 +88,25 @@ class ItemListCreate(generics.ListCreateAPIView):
 
         return super().perform_create(serializer)
     
+class ItemDelete(generics.DestroyAPIView):
+    serializer_class = ItemSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        itemID = self.kwargs.get('pk')
+        return Item.objects.filter(id=itemID, meal__author=self.request.user)
+
+
+
+class ItemUpdateView(generics.UpdateAPIView):
+    serializer_class = ItemSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        itemID = self.kwargs.get('pk')
+        return Item.objects.filter(id=itemID, meal__author=self.request.user)
+
+
+
+
 
