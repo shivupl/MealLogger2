@@ -11,6 +11,8 @@ function MealDetail(){
     const [meal, setMeal] = useState(null);
     const [items, setItems] = useState([]);
 
+    const [editItem, setEdit] = useState(null);
+
 
     const nav = useNavigate();
 
@@ -43,14 +45,22 @@ function MealDetail(){
         }).catch((err) => alert(err))
     };
 
-    const editItem = (itemID) => {
-        api.put(`api/item/${itemID}/edit`).then((res) => {
-            if(res.staus == 200)
-                alert("Item Updated");
-            else
-                alert("unable to edit item");
-        }).catch((err) => alert(err))
-    };
+
+    const editableItem = (itemID) => {
+        setEdit(itemID);
+    }
+
+
+    // const editItem = (itemID) => {
+    //     api.put(`api/item/${itemID}/edit`).then((res) => {
+    //         if(res.staus == 200)
+    //             alert("Item Updated");
+    //         else
+    //             alert("unable to edit item");
+    //     }).catch((err) => alert(err))
+    // };
+
+
 
 
 
@@ -65,10 +75,17 @@ function MealDetail(){
             <br />
 
             {items.map((item) => (
-                < Item item = {item} onDeleteItem={deleteItem} 
-                key = {item.id} 
+                < Item item = {item} 
+                onDeleteItem={deleteItem}
+                onEdititem = {editableItem} 
+                key = {item.id}
+                method = {item.id == editItem}
                 className = "item-each"/>
             ))}
+
+
+
+
 
 
 

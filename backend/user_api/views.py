@@ -105,6 +105,16 @@ class ItemUpdateView(generics.UpdateAPIView):
     def get_queryset(self):
         itemID = self.kwargs.get('pk')
         return Item.objects.filter(id=itemID, meal__author=self.request.user)
+    
+
+class ItemDetailView(generics.RetrieveAPIView):
+    serializer_class = ItemSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        itemID = self.kwargs.get('pk')
+        return Item.objects.filter(id=itemID, meal__author=self.request.user)
+        
 
 
 
