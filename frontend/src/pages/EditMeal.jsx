@@ -7,7 +7,6 @@ function EditMeal() {
 
     const { id } = useParams();
 
-    const [title, setTitle] = useState("");
     const [description, setDesc] = useState("");
     const [which, setWhich] = useState("");
 
@@ -16,7 +15,6 @@ function EditMeal() {
     useEffect(() => {
         api.get(`api/meal/${id}/view`).then((res) => {
             const meal = res.data;
-            setTitle(meal.title);
             setDesc(meal.description);
             setWhich(meal.which);
         })
@@ -26,7 +24,7 @@ function EditMeal() {
 
     const updateMeal = (e) => {
         e.preventDefault();
-        api.put(`api/meal/${id}/edit`, {description, title, which}).then((res) => {
+        api.put(`api/meal/${id}/edit`, {description, which}).then((res) => {
             if(res.status == 200){
                 alert("Meal Updated");
                 nav(`/meal/${id}/view`);
@@ -45,15 +43,6 @@ function EditMeal() {
             <h2 className="page-title">Edit Meal</h2>
 
             <form onSubmit={updateMeal}>
-                <label htmlFor="title">Title:</label>
-                <br />
-                <input 
-                    type="text" 
-                    id="title" 
-                    name="title" 
-                    required value={title} 
-                    onChange={(e) => setTitle(e.target.value)} 
-                />
                 <br />
 
                 <label htmlFor="description">Description:</label>

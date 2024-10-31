@@ -12,6 +12,7 @@ function MealDetail(){
     const [items, setItems] = useState([]);
 
     const [editItem, setEdit] = useState(null);
+    const [hasNotes, setHasNotes] = useState(true);
 
 
     const nav = useNavigate();
@@ -20,7 +21,8 @@ function MealDetail(){
         api.get(`api/meal/${id}/view`)
         .then((res) => {
             setMeal(res.data);
-            setItems(res.data.items)
+            setItems(res.data.items);
+            setHasNotes(res.data.description != "");
         }).catch((err) => alert(err))
     } 
 
@@ -50,7 +52,6 @@ function MealDetail(){
         setEdit(itemID);
     }
 
-
     // const editItem = (itemID) => {
     //     api.put(`api/item/${itemID}/edit`).then((res) => {
     //         if(res.staus == 200)
@@ -62,16 +63,17 @@ function MealDetail(){
 
 
 
-
-
     return (
         <div>
             <h2>Meal Details</h2>
-            <p> mead il: {id}</p>
-            <p><strong>Title:</strong> {meal?.title}</p>
-            <p><strong>Description:</strong> {meal?.description}</p>
-            <p><strong>Created At:</strong> {new Date(meal?.created_at).toLocaleString()}</p>
+            {/* <p>{new Date(meal?.created_at).toLocaleString()}</p> */}
+            <p>{new Date(meal?.created_at).toDateString()}</p>
+
+
             <p><strong>Which:</strong> {meal?.which}</p>
+            {hasNotes && (
+                <p><strong>Notes:</strong> {meal?.description}</p>
+            )}
             <br />
 
             {items.map((item) => (
@@ -84,14 +86,9 @@ function MealDetail(){
             ))}
 
 
-
-
-
-
-
             <br />
             <button className="edit-button" onClick={editMeal}>
-                Edit Meal
+                Edit Meal Details
             </button>
 
 

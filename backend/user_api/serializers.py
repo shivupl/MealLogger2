@@ -23,9 +23,10 @@ class ItemSerializer(serializers.ModelSerializer):
 
 
 class MealSerializer(serializers.ModelSerializer):
-    items = ItemSerializer(many= True, required=False) #?
+    items = ItemSerializer(many= True, required=False) 
+    description = serializers.CharField(required = False, allow_blank = True)
     class Meta:
         model = Meal
-        fields = ["id", "title", "description", "created_at", "author", "which", "items"]
+        fields = ["id", "description", "created_at", "author", "which", "items"]
         #fields = ["id", "title", "description", "created_at", "author"]
         extra_kwargs = {"author": {"read_only": True}}

@@ -55,6 +55,9 @@ function Item({item, onDeleteItem, onEdititem, method}) {
             <button className="edit-button" onClick={handleEditClick}>
                 Edit/Change Item
             </button> 
+            <button className="delete-button" onClick={() => onDeleteItem(item.id)}>
+            Delete Item
+            </button>
             
         </div>
         )}
@@ -97,12 +100,16 @@ function Item({item, onDeleteItem, onEdititem, method}) {
                 Save 
             </button>
 
+            <button className="delete-button" onClick={() => onDeleteItem(item.id)}>
+            Delete Item
+            </button>
+
             
         </div>
         )}
-        <button className="delete-button" onClick={() => onDeleteItem(item.id)}>
+        {/* <button className="delete-button" onClick={() => onDeleteItem(item.id)}>
             Delete Item
-        </button>
+        </button> */}
 
 
 

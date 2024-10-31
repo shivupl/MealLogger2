@@ -3,7 +3,6 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 class Meal(models.Model):
-    title = models.CharField(max_length=20)
     description = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     which = models.CharField(max_length=20, choices=[('Breakfast', 'Breakfast'), ('Lunch', 'Lunch'), ('Dinner', 'Dinner'), ('Snack', 'Snack')], default='Breakfast',blank=False)
