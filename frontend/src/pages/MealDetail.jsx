@@ -52,6 +52,18 @@ function MealDetail(){
         setEdit(itemID);
     }
 
+
+    const createItem = () => {
+
+        api.post(`api/meal/${id}/items`, {name:"", calories: 0 , quantity: 0}).then((res) => {
+            if(res.status != 201) {
+                alert("could not add item");
+            }
+            getMeal();
+            setEdit(res.data.id);
+        }).catch((err) => alert(err));
+    }
+
     // const editItem = (itemID) => {
     //     api.put(`api/item/${itemID}/edit`).then((res) => {
     //         if(res.staus == 200)
@@ -67,14 +79,17 @@ function MealDetail(){
         <div>
             <h2>Meal Details</h2>
             {/* <p>{new Date(meal?.created_at).toLocaleString()}</p> */}
-            <p>{new Date(meal?.created_at).toDateString()}</p>
 
+            <p>{meal?.which}, {new Date(meal?.created_at).toDateString()}</p>
 
-            <p><strong>Which:</strong> {meal?.which}</p>
             {hasNotes && (
                 <p><strong>Notes:</strong> {meal?.description}</p>
             )}
             <br />
+
+            
+
+
 
             {items.map((item) => (
                 < Item item = {item} 
@@ -86,6 +101,16 @@ function MealDetail(){
             ))}
 
 
+            
+
+
+            <br />
+
+            <button className="add-button" onClick={createItem}>
+                Add an Item
+            </button>
+
+            <br />
             <br />
             <button className="edit-button" onClick={editMeal}>
                 Edit Meal Details

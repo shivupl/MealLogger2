@@ -9,6 +9,7 @@ import Navbar from "./components/Navbar"
 import AddMeal from './pages/AddMeal'
 import MealDetail from "./pages/MealDetail"
 import EditMeal from './pages/EditMeal'
+import CalView from './pages/CalView'
 
 
 function Logout(){
@@ -59,6 +60,13 @@ function App() {
             }
           />
 
+          <Route path = "/calendar" element = {
+            <ProtectedRoute>
+              <Navbar/>
+              <CalView/>
+            </ProtectedRoute>
+            }
+          />
 
 
         <Route path = "/login" element= { <Login/>}/>

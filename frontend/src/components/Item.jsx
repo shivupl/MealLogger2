@@ -101,7 +101,7 @@ function Item({item, onDeleteItem, onEdititem, method}) {
             </button>
 
             <button className="delete-button" onClick={() => onDeleteItem(item.id)}>
-            Delete Item
+                Delete Item
             </button>
 
             

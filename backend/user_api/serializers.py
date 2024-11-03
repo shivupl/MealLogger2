@@ -17,6 +17,8 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class ItemSerializer(serializers.ModelSerializer):
+    name = serializers.CharField(required = False,allow_blank = True)
+    calories = serializers.FloatField(required = False)
     class Meta:
         model = Item
         fields = ["id", "name", "calories", "quantity"]
