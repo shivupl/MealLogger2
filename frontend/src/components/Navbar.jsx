@@ -9,9 +9,6 @@ function Navbar(){
                 <a href="/">Home</a>
             </li>
             <li>
-                <a href="/calendar">Calendar</a>
-            </li>
-            <li>
                 <a href="/addMeal">Log A Meal</a>
             </li>
             <li>

@@ -1,8 +1,9 @@
 .meal-container {
     padding: 10px;
     margin: 20px 0;
-    border: 7px solid #6bd5f5;
+    border: 7px solid #2e8099;
     border-radius: 5px;
+    background-color: rgb(255, 255, 255)
   }
   
   .meal-title {
@@ -18,31 +19,33 @@
     font-size: 0.8rem;
   }
   
-  .delete-button {
-    background-color: #f44336; /* Red */
+  
+  .meal-delete-button {
+    background-color: #f44336;
     color: white;
     border: none;
-    padding: 10px 20px;
+    padding: 5px 10px;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
+    margin: 4px;
   }
   
-  .delete-button:hover {
-    background-color: #d32f2f; /* Darker red */
+  .meal-delete-button:hover {
+    background-color: #c23329; 
   }
   
   .view-button {
-    background-color:#3f5bfc; /* Red */
+    background-color:#007bff;
     color: white; 
     border: none;
-    padding: 10px 20px;
+    padding: 5px 10px;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
   }
   
   .view-button:hover {
-    background-color: #2e4cf5; /* Darker red */
+    background-color: #046fe0; /* Darker red */
   }
 

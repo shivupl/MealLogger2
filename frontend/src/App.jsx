@@ -60,13 +60,6 @@ function App() {
             }
           />
 
-          <Route path = "/calendar" element = {
-            <ProtectedRoute>
-              <Navbar/>
-              <CalView/>
-            </ProtectedRoute>
-            }
-          />
 
 
         <Route path = "/login" element= { <Login/>}/>

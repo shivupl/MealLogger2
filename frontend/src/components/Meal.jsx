@@ -25,7 +25,7 @@ function Meal({meal, onDelete}) {
             View Meal
         </button>
 
-        <button className="delete-button" onClick={() => onDelete(meal.id)}>
+        <button className="meal-delete-button" onClick={() => onDelete(meal.id)}>
             Delete
         </button>
         

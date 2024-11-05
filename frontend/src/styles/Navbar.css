@@ -1,5 +1,5 @@
 nav {
-    background-color: #333;
+    background-color: #7e97ac;
     padding: 1rem;
   }
   
@@ -27,6 +27,9 @@ nav {
 
 .logout-button{
     color: red;
+    border: 1px solid red; 
+    border-radius: 6px;
+    padding: 14% 14%; 
   }
 
   

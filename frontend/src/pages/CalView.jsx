@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
 import api from "../api"
 import Meal from "../components/Meal";
-import "../styles/CalView.css"
 
 function CalView() {
     const [meals, setMeals] = useState({})
@@ -12,7 +11,7 @@ function CalView() {
         const days = [];
         for(let i = 0; i < 7; i++){
             const temp = new Date(currDate);
-            temp.setDate(currDate.getDate() + i);
+            temp.setDate(currDate.getDate() - currDate.getDay() + i + 1);
             days.push(temp);
         }
         setWeek(days);
@@ -66,33 +65,46 @@ function CalView() {
 
     return <div>
 
-        <div>
-            <button onClick={lastWeek}> 
-                Last Week 
-            </button>
+        <div className="cal-container">
+            <div className="ln-buttons">
+                <button onClick={lastWeek} className="last-button"> 
+                    Last Week 
+                </button>
 
-            <button onClick={nextWeek}> 
-                Next Week 
-            </button>
+                <button onClick={nextWeek} className="next-button"> 
+                    Next Week 
+                </button>
+            </div>
+
+
+            <div className="grid-container">
+                {week.map((date,index) => {
+                    const newMeals = meals[date.toDateString()] || [];
+                    return ( 
+                    <div key={index}>
+
+                        <div className="cal-date">
+                            <h3>{date.toLocaleDateString('en-US', { weekday: 'long' })}</h3>
+                            <h3>{date.toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' })}</h3>
+                        </div>
+                        
+
+                        <div className="cal-meal">
+                            {newMeals.map((meal) => (
+                                <Meal meal={meal} onDelete={deleteMeal} key={meal.id} />
+                            ))}
+                        </div>
+
+                    </div>)
+
+                })}
+
+
+            </div>
+            
         </div>
 
-
-        <div className="grid-container">
-            {week.map((date,index) => {
-                const newMeals = meals[date.toDateString()] || [];
-                return ( <div key={index} className="grid-item">
-
-                    <h3>{date.toDateString()} ({date.toLocaleDateString('en-US', { weekday: 'short' })})</h3>
-                    
-                    {newMeals.map((meal) => (
-                        <Meal meal={meal} onDelete={deleteMeal} key={meal.id} />
-                    ))}
-                </div>)
-
-            })}
-
-
-        </div>
+        
 
 
     

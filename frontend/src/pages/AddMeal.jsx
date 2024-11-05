@@ -49,7 +49,7 @@ function AddMeal() {
 
         <form onSubmit={handleSubmit(createMeal)}>
 
-            <label htmlFor="which" required>Which:</label>
+            <label htmlFor="which" required>Which: </label>
             
             <select {...register("which", {required: true})}>
                 <option value="">Select a Meal Type</option>
@@ -85,7 +85,8 @@ function AddMeal() {
                         type="text"
                         id="name"
                         name="name"
-                        {...register(`items.${index}.name`)}
+                        required
+                        {...register(`items.${index}.name`,{required: true})}
                     />
 
                     <span htmlFor="calories">Calories:</span>
@@ -94,6 +95,7 @@ function AddMeal() {
                         type="number"
                         id="calories"
                         name="calories"
+                        required
                         {...register(`items.${index}.calories`, {required: true})}
                     />
 
@@ -103,10 +105,11 @@ function AddMeal() {
                         type="number"
                         id="quantity"
                         name="quantity"
+                        required
                         {...register(`items.${index}.quantity`, {required: true})}
                     />
 
-                    <button type = "button" onClick={() => remove(index)}>
+                    <button type = "button" className= "item-remove-button" onClick={() => remove(index)}>
                         Remove Item
                     </button>
 
@@ -115,8 +118,9 @@ function AddMeal() {
 
                 </div>
             })}
+            <br />
 
-            <button type = "button"
+            <button type = "button" className="item-add-button"
             onClick={() => append({ name: "" , calories: 0, quantity: 0})}>
                 Add Item
             </button>

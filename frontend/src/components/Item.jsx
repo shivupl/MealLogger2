@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import api from "../api";
+import "../styles/item.css"
 
 function Item({item, onDeleteItem, onEdititem, method}) {
 
@@ -38,25 +39,26 @@ function Item({item, onDeleteItem, onEdititem, method}) {
     };
 
     const handleSaveClick = (e) => {
+        
         updateItem(e);
         setVal("View");
     }
 
 
-    return (<div>
+    return (<div className="item-container">
 
         {val === "View" && (
         <div>
-            <p className="item-name"><b>Item Name: </b>{item.name}</p>
-            <p className="item-cal"><em>Calories: </em>{item.calories}</p>
+            <p className="item-name"><b>{item.name}</b></p>
+            <p className="item-cal">{item.calories} Calories</p>
             <p className="item-quantity"><em>Quantity: </em>{item.quantity}</p>
-            <p className="item-id"><em>Item ID: </em>{item.id}</p>
+            {/* <p className="item-id"><em>Item ID: </em>{item.id}</p> */}
 
-            <button className="edit-button" onClick={handleEditClick}>
+            <button className="item-edit-button" onClick={handleEditClick}>
                 Edit/Change Item
             </button> 
-            <button className="delete-button" onClick={() => onDeleteItem(item.id)}>
-            Delete Item
+            <button className="item-delete-button" onClick={() => onDeleteItem(item.id)}>
+                Delete Item
             </button>
             
         </div>
@@ -71,7 +73,8 @@ function Item({item, onDeleteItem, onEdititem, method}) {
                 id = "name"
                 value={name}
                 required
-                onChange={(e) => setName(e.target.value)}  />
+                onChange={(e) => setName(e.target.value)}  
+                />
             </p>
 
             <p className="item-cal"><em>Calories: </em>
@@ -81,6 +84,7 @@ function Item({item, onDeleteItem, onEdititem, method}) {
                 id = "calories"
                 value={calories}
                 onChange={(e) => setCal(e.target.value)}
+                required
                  />
             </p>
 
@@ -91,16 +95,16 @@ function Item({item, onDeleteItem, onEdititem, method}) {
                 id = "quantity"
                 value={quantity}
                 onChange={(e) => setQuantity(e.target.value)}
+                required
                  />
             </p>
 
-            <p className="item-id"><em>Item ID: </em>{item.id}</p>
 
             <button className="save-button" onClick={handleSaveClick}>
                 Save 
             </button>
 
-            <button className="delete-button" onClick={() => onDeleteItem(item.id)}>
+            <button className="item-delete-button" onClick={() => onDeleteItem(item.id)}>
                 Delete Item
             </button>
 
