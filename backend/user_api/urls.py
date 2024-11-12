@@ -11,4 +11,5 @@ urlpatterns = [
     path('meal/<int:pk>/items', views.ItemListCreate.as_view(), name = 'item-create'),
     path('meal/<int:pk>/edit', views.MealUpdateView.as_view(), name = 'meal-update'),
     path('item/<int:pk>/edit', views.ItemUpdateView.as_view(), name = 'item-update'),
+    path('fetch-item-info/<str:item>', views.FetchItemInfo, name = 'item-api-info'),
 ]

@@ -39,6 +39,11 @@ html, body {
   border-radius: 6px;
   border: none;
   font-size: 16px;
+  transition: background-color 0.3s;
+}
+.last-button:hover, .next-button:hover {
+  background-color: rgb(77, 75, 219);
+
 }
 
 .grid-container {

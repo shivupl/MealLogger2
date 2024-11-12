@@ -5,6 +5,9 @@ from .serializers import UserSerializer, MealSerializer, ItemSerializer
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from .models import Meal
 from .models import Item
+import requests
+from django.http import JsonResponse
+
 
 
 # User Views
@@ -96,8 +99,6 @@ class ItemDelete(generics.DestroyAPIView):
         itemID = self.kwargs.get('pk')
         return Item.objects.filter(id=itemID, meal__author=self.request.user)
 
-
-
 class ItemUpdateView(generics.UpdateAPIView):
     serializer_class = ItemSerializer
     permission_classes = [IsAuthenticated]
@@ -114,6 +115,16 @@ class ItemDetailView(generics.RetrieveAPIView):
     def get_queryset(self):
         itemID = self.kwargs.get('pk')
         return Item.objects.filter(id=itemID, meal__author=self.request.user)
+    
+
+def FetchItemInfo(request, item):
+    api_url = 'https://api.calorieninjas.com/v1/nutrition?query='
+    response = requests.get(api_url + item, headers={'X-Api-Key': '8rluDVXWfisgryBz6Psb+g==4A1FMjhbDzdVm1j1'})
+    if response.status_code == requests.codes.ok:
+        return JsonResponse(response.json())
+    else:
+        return JsonResponse("Error:", response.status_code, response.text)
+
         
 
 

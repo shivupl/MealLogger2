@@ -13,20 +13,36 @@ function Item({item, onDeleteItem, onEdititem, method}) {
     const[name, setName] = useState("");
     const[calories, setCal] = useState(0);
     const[quantity, setQuantity] = useState(0);
+    const[protein, setProtein] = useState(0);
+    const[fat, setFat] = useState(0);
+    const[sugar, setSugar] = useState(0);
+
+
+
+    const getItem = () => {
+        api.get(`api/item/${item.id}/view`).then((res) => {
+            setName(item.name);
+            setCal(item.calories);
+            setQuantity(item.quantity);
+            setProtein(item.protein);
+            setFat(item.fat);
+            setSugar(item.sugar);
+        }).catch((err) => alert(err))
+    }
+
 
 
     useEffect(() => {
-        setName(item.name);
-        setCal(item.calories);
-        setQuantity(item.quantity);
+        getItem();
     },[item])
 
     const updateItem = (e) => {
         e.preventDefault();
-        api.put(`api/item/${item.id}/edit`, {name, calories, quantity}).then((res) => {
+        api.put(`api/item/${item.id}/edit`, {name, calories, quantity, protein, fat, sugar}).then((res) => {
             if(res.status == 200){
                 alert("item updated");
                 //setVal("View");
+                getItem();
             }
             else alert("error");
         }).catch((err) => alert(err))
@@ -35,14 +51,23 @@ function Item({item, onDeleteItem, onEdititem, method}) {
 
     const handleEditClick = () => {
         onEdititem(item.id);  
+        getItem();
         setVal("Edit");  
     };
 
     const handleSaveClick = (e) => {
-        
-        updateItem(e);
-        setVal("View");
-    }
+        e.preventDefault();
+        api.put(`api/item/${item.id}/edit`, { name, calories, quantity, protein, fat, sugar }).then((res) => {
+            if (res.status === 200) {
+                alert("Item updated");
+                onEdititem(res.data);
+                setVal("View");
+            } else {
+                alert("Error updating item");
+            }
+        }).catch((err) => alert(err));
+    };
+    
 
 
     return (<div className="item-container">
@@ -50,8 +75,11 @@ function Item({item, onDeleteItem, onEdititem, method}) {
         {val === "View" && (
         <div>
             <p className="item-name"><b>{item.name}</b></p>
+            <p className="item-quantity"><em>Quantity: </em>{item.quantity} <em> grams</em></p>
             <p className="item-cal">{item.calories} Calories</p>
-            <p className="item-quantity"><em>Quantity: </em>{item.quantity}</p>
+            <p className="item-cal">{item.protein}g Protein</p>
+            <p className="item-cal">{item.fat}g Total Fats</p>
+            <p className="item-cal">{item.sugar}g Sugar</p>
             {/* <p className="item-id"><em>Item ID: </em>{item.id}</p> */}
 
             <button className="item-edit-button" onClick={handleEditClick}>
@@ -77,16 +105,6 @@ function Item({item, onDeleteItem, onEdititem, method}) {
                 />
             </p>
 
-            <p className="item-cal"><em>Calories: </em>
-                <input 
-                type="number"
-                name = "calories"
-                id = "calories"
-                value={calories}
-                onChange={(e) => setCal(e.target.value)}
-                required
-                 />
-            </p>
 
             <p className="item-quantity"><em>Quantity: </em>
                 <input 
@@ -98,6 +116,55 @@ function Item({item, onDeleteItem, onEdititem, method}) {
                 required
                  />
             </p>
+
+            <p className="item-cal"><em>Calories: </em>
+                <input 
+                type="number"
+                name = "calories"
+                id = "calories"
+                value={calories}
+                onChange={(e) => setCal(e.target.value)}
+                required
+                 />
+            </p>
+
+            <p className="item-pro"><em>Protein: </em>
+                <input 
+                type="number"
+                name = "protein"
+                id = "protein"
+                value={protein}
+                onChange={(e) => setProtein(e.target.value)}
+                required
+                 />
+            </p>
+
+            <p className="item-fat"><em>Fat: </em>
+                <input 
+                type="number"
+                name = "fat"
+                id = "fat"
+                value={fat}
+                onChange={(e) => setFat(e.target.value)}
+                required
+                 />
+            </p>
+
+            <p className="item-sugar"><em>Sugar: </em>
+                <input 
+                type="number"
+                name = "sugar"
+                id = "sugar"
+                value={sugar}
+                onChange={(e) => setSugar(e.target.value)}
+                required
+                 />
+            </p>
+
+
+
+
+
 
 
             <button className="save-button" onClick={handleSaveClick}>

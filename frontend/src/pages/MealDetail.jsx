@@ -32,9 +32,9 @@ function MealDetail(){
     }, [id]);
 
 
-    const editMeal = () => {
-        
+    const editMeal = () => {    
         nav(`/meal/${id}/edit`)
+        getMeal();
 
     }
 
@@ -48,31 +48,38 @@ function MealDetail(){
     };
 
 
+
     const editableItem = (itemID) => {
         setEdit(itemID);
+        getMeal();
     }
 
+
+    const refItem = (updatedItem) => {
+        itemUpdate(updatedItem); 
+    };
+
+    const itemUpdate = (updatedItem) => {
+        setItems((prevItems) => {
+            return prevItems.map((item) => {
+                if (item.id == updatedItem.id)
+                    return updatedItem;
+                else
+                    return item;
+            });
+        });
+    };
 
     const createItem = () => {
 
-        api.post(`api/meal/${id}/items`, {name:"", calories: 0 , quantity: 0}).then((res) => {
+        api.post(`api/meal/${id}/items`, {name:"", calories: 0 , quantity: 0, fat:0, sugar:0, protein:0}).then((res) => {
             if(res.status != 201) {
                 alert("could not add item");
             }
-            getMeal();
             setEdit(res.data.id);
+            getMeal();
         }).catch((err) => alert(err));
     }
-
-    // const editItem = (itemID) => {
-    //     api.put(`api/item/${itemID}/edit`).then((res) => {
-    //         if(res.staus == 200)
-    //             alert("Item Updated");
-    //         else
-    //             alert("unable to edit item");
-    //     }).catch((err) => alert(err))
-    // };
-
 
 
     return (
@@ -88,21 +95,14 @@ function MealDetail(){
             <br />
 
             
-
-
-
             {items.map((item) => (
                 < Item item = {item} 
                 onDeleteItem={deleteItem}
-                onEdititem = {editableItem} 
+                onEdititem = {refItem}
                 key = {item.id}
                 method = {item.id == editItem}
                 className = "item-each"/>
             ))}
-
-
-            
-
 
             <br />
 

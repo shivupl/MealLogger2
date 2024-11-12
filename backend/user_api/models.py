@@ -21,6 +21,9 @@ class Item(models.Model):
     name = models.CharField(max_length=25)
     calories = models.FloatField()
     quantity = models.FloatField()
+    sugar = models.FloatField()
+    fat = models.FloatField()
+    protein = models.FloatField()
 
     meal = models.ForeignKey(Meal, on_delete=models.CASCADE, related_name="items")
 
