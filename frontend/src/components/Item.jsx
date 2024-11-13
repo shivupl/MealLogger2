@@ -80,10 +80,9 @@ function Item({item, onDeleteItem, onEdititem, method}) {
             <p className="item-cal">{item.protein}g Protein</p>
             <p className="item-cal">{item.fat}g Total Fats</p>
             <p className="item-cal">{item.sugar}g Sugar</p>
-            {/* <p className="item-id"><em>Item ID: </em>{item.id}</p> */}
 
             <button className="item-edit-button" onClick={handleEditClick}>
-                Edit/Change Item
+                Edit Item
             </button> 
             <button className="item-delete-button" onClick={() => onDeleteItem(item.id)}>
                 Delete Item
@@ -106,7 +105,7 @@ function Item({item, onDeleteItem, onEdititem, method}) {
             </p>
 
 
-            <p className="item-quantity"><em>Quantity: </em>
+            <p className="edit-item-quantity"><em>Quantity: </em>
                 <input 
                 type="number"
                 name = "quantity"
@@ -117,7 +116,7 @@ function Item({item, onDeleteItem, onEdititem, method}) {
                  />
             </p>
 
-            <p className="item-cal"><em>Calories: </em>
+            <p className="edit-item-cal"><em>Calories: </em>
                 <input 
                 type="number"
                 name = "calories"
@@ -128,7 +127,7 @@ function Item({item, onDeleteItem, onEdititem, method}) {
                  />
             </p>
 
-            <p className="item-pro"><em>Protein: </em>
+            <p className="edit-item-pro"><em>Protein: </em>
                 <input 
                 type="number"
                 name = "protein"
@@ -139,7 +138,7 @@ function Item({item, onDeleteItem, onEdititem, method}) {
                  />
             </p>
 
-            <p className="item-fat"><em>Fat: </em>
+            <p className="edit-item-fat"><em>Fat: </em>
                 <input 
                 type="number"
                 name = "fat"
@@ -150,7 +149,7 @@ function Item({item, onDeleteItem, onEdititem, method}) {
                  />
             </p>
 
-            <p className="item-sugar"><em>Sugar: </em>
+            <p className="edit-item-sugar"><em>Sugar: </em>
                 <input 
                 type="number"
                 name = "sugar"

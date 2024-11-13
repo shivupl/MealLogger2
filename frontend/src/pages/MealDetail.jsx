@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import api from "../api"
 import Item from "../components/Item";
+import "../styles/MealDetail.css";
 
 
 function MealDetail(){
@@ -83,28 +84,28 @@ function MealDetail(){
 
 
     return (
-        <div>
-            <h2>Meal Details</h2>
-            {/* <p>{new Date(meal?.created_at).toLocaleString()}</p> */}
+        <div className="meal-detail-container">
 
-            <p>{meal?.which}, {new Date(meal?.created_at).toDateString()}</p>
+            <div>
+                <h2>Meal Details</h2>
+                <p>{meal?.which}, {new Date(meal?.created_at).toDateString()}</p>
 
-            {hasNotes && (
-                <p><strong>Notes:</strong> {meal?.description}</p>
-            )}
-            <br />
+                {hasNotes && (
+                    <p><strong>Notes:</strong> {meal?.description}</p>
+                )}
+            </div>
 
-            
-            {items.map((item) => (
-                < Item item = {item} 
-                onDeleteItem={deleteItem}
-                onEdititem = {refItem}
-                key = {item.id}
-                method = {item.id == editItem}
-                className = "item-each"/>
-            ))}
 
-            <br />
+            <div className="item-list">
+                {items.map((item) => (
+                    < Item item = {item} 
+                    onDeleteItem={deleteItem}
+                    onEdititem = {refItem}
+                    key = {item.id}
+                    method = {item.id == editItem}
+                    className = "item-each"/>
+                ))}
+            </div>
 
             <button className="add-button" onClick={createItem}>
                 Add an Item
